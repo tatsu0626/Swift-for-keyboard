@@ -8,13 +8,34 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController,UITextFieldDelegate {
+    @IBOutlet var mailTextfield: UITextField!
+    
+    @IBOutlet var passwordTextfield: UITextField!
+    
+    @IBOutlet var resultLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        mailTextfield.delegate=self
+        passwordTextfield.delegate=self
+   }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        mailTextfield.resignFirstResponder()
+        passwordTextfield.resignFirstResponder()
     }
 
+    @IBAction func Signin(_ sender: Any) {
+        resultLabel.text=mailTextfield.text!+""+passwordTextfield.text!
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
